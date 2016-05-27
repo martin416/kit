@@ -1,11 +1,11 @@
-# Go kit [![Circle CI](https://circleci.com/gh/go-kit/kit.svg?style=svg)](https://circleci.com/gh/go-kit/kit) [![Drone.io](https://drone.io/github.com/go-kit/kit/status.png)](https://drone.io/github.com/go-kit/kit/latest) [![Travis CI](https://travis-ci.org/go-kit/kit.svg?branch=master)](https://travis-ci.org/go-kit/kit) [![GoDoc](https://godoc.org/github.com/go-kit/kit?status.svg)](https://godoc.org/github.com/go-kit/kit) [![Coverage Status](https://coveralls.io/repos/go-kit/kit/badge.svg?branch=master&service=github)](https://coveralls.io/github/go-kit/kit?branch=master)
+# Go kit [![Circle CI](https://circleci.com/gh/go-kit/kit.svg?style=svg)](https://circleci.com/gh/go-kit/kit) [![Drone.io](https://drone.io/github.com/go-kit/kit/status.png)](https://drone.io/github.com/go-kit/kit/latest) [![Travis CI](https://travis-ci.org/go-kit/kit.svg?branch=master)](https://travis-ci.org/go-kit/kit) [![GoDoc](https://godoc.org/github.com/go-kit/kit?status.svg)](https://godoc.org/github.com/go-kit/kit) [![Coverage Status](https://coveralls.io/repos/go-kit/kit/badge.svg?branch=master&service=github)](https://coveralls.io/github/go-kit/kit?branch=master) [![Go Report Card](https://goreportcard.com/badge/go-kit/kit)](https://goreportcard.com/report/go-kit/kit)
 
 **Go kit** is a **distributed programming toolkit** for building microservices
 in large organizations. We solve common problems in distributed systems, so
 you can focus on your business logic.
 
 - Mailing list: [go-kit](https://groups.google.com/forum/#!forum/go-kit)
-- Slack: [gophers.slack.com](https://gophers.slack.com) **#go-kit** ([invite](http://bit.ly/go-slack-signup))
+- Slack: [gophers.slack.com](https://gophers.slack.com) **#go-kit** ([invite](https://gophersinvite.herokuapp.com/))
 
 ## Documentation
 
@@ -53,9 +53,9 @@ for simple JSON over HTTP. If your organization uses a fully-featured
 transport, bindings are typically provided by the Go library for the
 transport, and there's not much for Go kit to do. In those cases, see the
 examples to understand how to write adapters for your endpoints. For now, see
-the [addsvc][addsvc] to understand how transport bindings work. We'll soon
-have specific examples for Thrift, gRPC, net/rpc, and JSON over HTTP. Avro and
-JSON/RPC support is planned.
+the [addsvc][addsvc] to understand how transport bindings work. We have
+specific examples for Thrift, gRPC, net/rpc, and JSON over HTTP. JSON/RPC and
+Swagger support is planned.
 
 [transport]: https://github.com/go-kit/kit/tree/master/transport
 [addsvc]: https://github.com/go-kit/kit/tree/master/examples/addsvc
@@ -106,8 +106,8 @@ kit's [loadbalancer package][loadbalancer] provides client-side endpoint
 middleware to solve that problem, whether your organization uses static hosts
 or IPs, [DNS SRV records][dnssrv], Consul, etcd, or Zookeeper. And if you use
 a custom system, it's very easy to write your own [Publisher][] and use Go
-kit's load balancing strategies. (Currently, static hosts, DNS SRV, etcd, and
-Consul are supported; ZooKeeper support is planned.)
+kit's load balancing strategies. (Currently, static hosts, DNS SRV, etcd, Consul
+and ZooKeeper are supported)
 
 [loadbalancer]: https://github.com/go-kit/kit/tree/master/loadbalancer
 [dnssrv]: https://github.com/go-kit/kit/tree/master/loadbalancer/dnssrv
@@ -127,7 +127,7 @@ in the large. Go kit is a set of packages and best practices, leveraging years
 of production experience, and providing a comprehensive, robust, and trustable
 platform for organizations of any size.
 
-In short, Go kit brings Go to the modern enterprise.
+In short, Go kit makes Go a viable choice for business-domain microservices.
 
 For more details, see
  [the motivating blog post](http://peter.bourgon.org/go-kit/) and
@@ -144,44 +144,32 @@ See also the
 
 ## Non-goals
 
-- Supporting messaging patterns other than RPC (in the initial release) — MPI, pub/sub, CQRS, etc.
-- Re-implementing functionality that can be provided by wrapping existing packages
-- Having opinions on deployment, orchestration, process supervision, etc.
-- Having opinions on configuration passing — flags, env vars, files, etc.
+- Supporting messaging patterns other than RPC (for now) — e.g. MPI, pub/sub, CQRS, etc.
+- Re-implementing functionality that can be provided by adapting existing software
+- Having opinions on operational concerns: deployment, configuration, process supervision, orchestration, etc.
 
 ## Contributing
 
-Please see [CONTRIBUTING.md]. Thank you, [contributors]!
+Please see [CONTRIBUTING.md][]. Thank you, [contributors][]!
 
 [CONTRIBUTING.md]: /CONTRIBUTING.md
 [contributors]: https://github.com/go-kit/kit/graphs/contributors
 
 ## Dependency management
 
-Go kit is a library, designed to be imported into a binary package. Vendoring
-is currently the best way for binary package authors to ensure reliable,
-reproducible builds.  Therefore, we strongly recommend our users use vendoring
-for all of their dependencies, including Go kit.   To avoid compatibility and
-availability issues, Go kit doesn't vendor its own dependencies, and doesn't
-recommend use of third-party import proxies.
+Go kit is a library, designed to be imported into a binary package.
+Vendoring is currently the best way for binary package authors to ensure reliable, reproducible builds.
+Therefore, we strongly recommend our users use vendoring for all of their dependencies, including Go kit.   
+To avoid compatibility and availability issues, Go kit doesn't vendor its own dependencies, and doesn't recommend use of third-party import proxies.
 
-There are several tools which make vendoring easier, including [gb][],
-[govendor][], and [Godep][]. And Go kit uses a variety of continuous
-integration providers to find and fix compatibility problems as soon as they
-occur.
+There are several tools which make vendoring easier, including [gb][], [glide][], [gvt][], [govendor][], and [vendetta][].
+In addition, Go kit uses a variety of continuous integration providers to find and fix compatibility problems as soon as they occur.
 
 [gb]: http://getgb.io
+[glide]: https://github.com/Masterminds/glide
+[gvt]: https://github.com/FiloSottile/gvt
 [govendor]: https://github.com/kardianos/govendor
-[Godep]: https://github.com/tools/godep
-
-## API stability policy
-
-The Go kit project depends on code maintained by others.
-This includes the Go standard library and sub-repositories and other external libraries.
-The Go language and standard library provide stability guarantees, but the other external libraries typically do not.
-[The API Stability RFC](https://github.com/go-kit/kit/tree/master/rfc/rfc007-api-stability.md)
- proposes a standard policy for package authors to advertise API stability.
-The Go kit project prefers to depend on code that abides the API stability policy.
+[vendetta]: https://github.com/dpw/vendetta
 
 ## Related projects
 
@@ -189,6 +177,7 @@ Projects with a ★ have had particular influence on Go kit's design (or vice-ve
 
 ### Service frameworks
 
+- [gizmo](https://github.com/nytimes/gizmo), a microservice toolkit from The New York Times ★
 - [go-micro](https://github.com/myodc/go-micro), a microservices client/server library ★
 - [gocircuit](https://github.com/gocircuit/circuit), dynamic cloud orchestration
 - [gotalk](https://github.com/rsms/gotalk), async peer communication protocol &amp; library
@@ -230,3 +219,4 @@ Projects with a ★ have had particular influence on Go kit's design (or vice-ve
 - [Architecting for the Cloud](http://fr.slideshare.net/stonse/architecting-for-the-cloud-using-netflixoss-codemash-workshop-29852233) — Netflix
 - [Dapper, a Large-Scale Distributed Systems Tracing Infrastructure](http://research.google.com/pubs/pub36356.html) — Google
 - [Your Server as a Function](http://monkey.org/~marius/funsrv.pdf) (PDF) — Twitter
+
